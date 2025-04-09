@@ -1,0 +1,48 @@
+body {
+  font-family: 'Arial', sans-serif;
+  background: #f5f5dc;
+  color: #333;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.menu {
+  border: 2px solid #8B4513;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 15px;
+  background: #FAF0E6;
+}
+
+.hidden {
+  display: none;
+}
+
+button {
+  background: #8B4513;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  margin: 5px 0;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.progress-bar {
+  background: #ddd;
+  height: 20px;
+  margin: 10px 0;
+  border-radius: 3px;
+}
+
+.progress {
+  background: #4CAF50;
+  height: 100%;
+  width: 0%;
+  border-radius: 3px;
+}
+
+.resource {
+  margin: 10px 0;
+}
