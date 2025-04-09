@@ -1,0 +1,98 @@
+// Player Data
+let player = {
+  sect: null,
+  skills: {
+    sword: 0,
+    qi: 0
+  },
+  resources: {
+    herbs: 0,
+    ore: 0
+  }
+};
+
+// Sect Selection
+function joinSect(sectName) {
+  player.sect = sectName;
+  document.getElementById("sect-menu").classList.add("hidden");
+  document.getElementById("skills-menu").classList.remove("hidden");
+  document.getElementById("life-menu").classList.remove("hidden");
+  addLog(`你加入了${sectName}！`);
+}
+
+// Skill Training
+function trainSkill(skill) {
+  if (!player.intervals) player.intervals = {};
+  
+  if (player.intervals[skill]) {
+    clearInterval(player.intervals[skill]);
+    delete player.intervals[skill];
+    return;
+  }
+
+  player.intervals[skill] = setInterval(() => {
+    player.skills[skill] += 1;
+    updateProgressBars();
+    addLog(`${skill === 'sword' ? '剑法' : '内功'}经验+1！`);
+    saveGame();
+  }, 3000);
+}
+
+// Life Skills
+function startActivity(activity) {
+  if (!player.intervals) player.intervals = {};
+  
+  if (player.intervals[activity]) {
+    clearInterval(player.intervals[activity]);
+    delete player.intervals[activity];
+    return;
+  }
+
+  player.intervals[activity] = setInterval(() => {
+    player.resources[activity] += 1;
+    document.getElementById(activity === 'herbalism' ? 'herbs' : 'ore').textContent = player.resources[activity];
+    addLog(`获得${activity === 'herbalism' ? '草药' : '矿石'}！`);
+    saveGame();
+  }, 5000);
+}
+
+// Quest Log
+function addLog(message) {
+  const log = document.getElementById("quest-log");
+  log.innerHTML = `<p>${new Date().toLocaleTimeString()}: ${message}</p>` + log.innerHTML;
+}
+
+// Progress Bars
+function updateProgressBars() {
+  document.getElementById("sword-progress").style.width = `${player.skills.sword}%`;
+  document.getElementById("qi-progress").style.width = `${player.skills.qi}%`;
+}
+
+// Save/Load
+function saveGame() {
+  localStorage.setItem("wuxiaPlayer", JSON.stringify(player));
+}
+
+function loadGame() {
+  const saved = localStorage.getItem("wuxiaPlayer");
+  if (saved) {
+    player = JSON.parse(saved);
+    updateProgressBars();
+    document.getElementById("herbs").textContent = player.resources.herbs;
+    document.getElementById("ore").textContent = player.resources.ore;
+    addLog("游戏已加载！");
+  }
+}
+
+// Initialize
+loadGame();
+
+// Random Events
+setInterval(() => {
+  const events = [
+    "你在山林中偶遇一位高人，指点你武功！",
+    "山贼袭击！损失了一些资源...",
+    "发现了一处隐秘的药田！"
+  ];
+  addLog(events[Math.floor(Math.random() * events.length)]);
+}, 60000);

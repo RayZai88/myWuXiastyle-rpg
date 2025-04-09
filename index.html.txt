@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>江湖逍遥录 | Wuxia Idle RPG</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>江湖逍遥录</h1>
+    
+    <!-- Sect Selection Menu -->
+    <div id="sect-menu" class="menu">
+      <h2>选择你的门派</h2>
+      <button onclick="joinSect('武当')">武当派</button>
+      <button onclick="joinSect('少林')">少林派</button>
+      <button onclick="joinSect('峨眉')">峨眉派</button>
+    </div>
+
+    <!-- Skills Menu (Hidden Initially) -->
+    <div id="skills-menu" class="menu hidden">
+      <h2>武功修炼</h2>
+      <div class="skill">
+        <span>剑法</span>
+        <div class="progress-bar"><div id="sword-progress" class="progress"></div></div>
+        <button onclick="trainSkill('sword')">修炼剑法</button>
+      </div>
+      <div class="skill">
+        <span>内功</span>
+        <div class="progress-bar"><div id="qi-progress" class="progress"></div></div>
+        <button onclick="trainSkill('qi')">修炼内功</button>
+      </div>
+    </div>
+
+    <!-- Life Skills Menu -->
+    <div id="life-menu" class="menu hidden">
+      <h2>生活技能</h2>
+      <div class="resource">
+        <span>草药: <span id="herbs">0</span></span>
+        <button onclick="startActivity('herbalism')">采药</button>
+      </div>
+      <div class="resource">
+        <span>矿石: <span id="ore">0</span></span>
+        <button onclick="startActivity('mining')">采矿</button>
+      </div>
+    </div>
+
+    <!-- Quest Log -->
+    <div id="log-menu" class="menu">
+      <h2>江湖日志</h2>
+      <div id="quest-log"></div>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
